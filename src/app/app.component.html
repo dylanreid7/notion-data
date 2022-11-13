@@ -1,7 +1,7 @@
 <!-- <div *ngFor="let data of notionData">
   <p>{{ data }}</p>
 </div> -->
-<app-calories></app-calories>
+<app-calories [data]="notionData"></app-calories>
 <h1>Notion Data:</h1>
 <!-- ['Date', 'Food Tracked', 'Workout', 'Personal Project', 'Review Goals', 'Meditate', 'Workout Description', 'Tasks Completed', 'Screen Time', 'Calories', 'Weight']; -->
 <table mat-table [dataSource]="notionData" class="mat-elevation-z8">

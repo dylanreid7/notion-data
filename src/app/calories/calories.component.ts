@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as d3 from 'd3';
+import { ChartConfiguration, ChartOptions } from "chart.js";
 // import { LineChart } from 'd3/line-chart';
 
 @Component({
@@ -7,7 +8,83 @@ import * as d3 from 'd3';
   templateUrl: './calories.component.html',
   styleUrls: ['./calories.component.scss']
 })
-export class CaloriesComponent implements OnInit {
+export class CaloriesComponent implements OnInit, OnChanges {
+  @Input() data: any = [];
+  // xAxis: string[] = ['one', 'two', 'three'];
+  // yAxis: number[] = [12, 15, 13];
+  yAxis: number[] = [2000, 2000, 2000, 2000, 1650, 1535]
+  xAxis: string[] = ['2022-11-11', '2022-11-10', '2022-11-09', '2022-11-08', '2022-11-04', '2022-11-07']
+
+
+  ngOnInit(): void {
+    // this.createSvg();
+    // this.drawBars(this.calories);
+    // this.tranformData(this.data);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.tranformData(this.data);
+    console.log('y axis: ', this.yAxis);
+    console.log('x axis: ', this.xAxis);
+    console.log('tye x :', typeof this.xAxis[1]);
+    console.log('line chart data: ', this.lineChartData);
+  }
+
+  createData(xData: string[], yData: number[]) {
+    let chart: ChartConfiguration<'line'>['data'] = {
+      labels: xData,
+      datasets: [
+        {
+          data: yData,
+          label: 'Calories',
+          fill: false,
+          tension: 0.5,
+          borderColor: 'black',
+          backgroundColor: 'rgba(255,0,0,0.3)'
+        }
+      ] 
+    };
+    return chart;
+  }
+
+  tranformData(inputData: any) {
+    console.log('data here: ', inputData);
+    this.xAxis = [];
+    this.yAxis = [];
+    inputData.forEach((input: any) => {
+      this.xAxis.push(input.Date);
+      this.yAxis.push(input['Calories Consumed']);
+    });
+    let chart = this.createData(this.xAxis, this.yAxis);
+    this.lineChartData = chart;
+  }
+
+  
+
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
+    labels: this.xAxis,
+    datasets: [
+      {
+        data: this.yAxis,
+        label: 'Calories',
+        fill: false,
+        tension: 0.5,
+        borderColor: 'black',
+        backgroundColor: 'rgba(255,0,0,0.3)'
+      }
+    ]
+  };
+  public lineChartOptions: ChartOptions<'line'> = {
+    responsive: false
+  };
+  public lineChartLegend = false;
+
+
+
+
+
+
+
   calories = [
     { 
       date: '11-04-22',
@@ -85,9 +162,6 @@ export class CaloriesComponent implements OnInit {
   //   .y((d: any) => { return d.calories })
 
 
-  ngOnInit(): void {
-    this.createSvg();
-    this.drawBars(this.calories);
-  }
+
 
 }

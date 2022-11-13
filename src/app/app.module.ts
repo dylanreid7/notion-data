@@ -11,9 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CaloriesComponent } from './calories/calories.component';
 import { NgChartsModule } from 'ng2-charts';
-// import { ChartsModule } from '@progress/kendo-angular-charts';
-// import { ButtonsModule } from "@progress/kendo-angular-buttons";
-// import { InputsModule } from "@progress/kendo-angular-inputs";
 import 'hammerjs';
 
 
@@ -31,8 +28,7 @@ import 'hammerjs';
     MatTableModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    NgChartsModule,
-    MatCheckboxModule
+    NgChartsModule
   ],
   providers: [NotionService],
   bootstrap: [AppComponent]

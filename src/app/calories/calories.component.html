@@ -1,6 +1,20 @@
 <!-- <p>calories works!</p>
 <figure id="bar"></figure> -->
 <p>calories works!</p>
+
+
+<div style="display: block;">
+    <canvas baseChart width="400" height="400"
+      [type]="'line'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend">
+    </canvas>
+  </div>
+
+
+
+
 <!-- <kendo-chart>
     <kendo-chart-title text="Units sold"></kendo-chart-title>
     <kendo-chart-category-axis>
